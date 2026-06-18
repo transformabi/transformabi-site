@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Transforma BI é uma plataforma completa de Business Intelligence com módulos de RH, Financeiro, Logística, Vendas e muito mais. Do funcionário ao CEO, visibilidade total do seu negócio.">
+<meta name="keywords" content="Business Intelligence, BI, RH, Financeiro, Logística, Vendas, Dashboard, SaaS, Analytics">
+<meta property="og:title" content="Transforma BI — Business Intelligence Completo">
+<meta property="og:description" content="Plataforma SaaS de BI com módulos de RH, DP, Financeiro, Logística e Vendas. Visibilidade total do seu negócio.">
+<meta property="og:type" content="website">
+<title>Transforma BI — Business Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#1A2B2A;background:#fff;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ─── VARS ─── */
+:root{
+  --teal-dark:#0F6E56;
+  --teal-mid:#1D9E75;
+  --teal-light:#9FE1CB;
+  --lime:#A8C83A;
+  --lime-dark:#7A9B28;
+  --bg-light:#F4FAF7;
+  --bg-dark:#0A1F18;
+  --text-dark:#1A2B2A;
+  --text-mid:#4A6360;
+  --text-light:#7A9B98;
+  --white:#FFFFFF;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(15,110,86,.10);
+}
+
+/* ─── TOPBAR ─── */
+.topbar{background:var(--teal-dark);color:#fff;font-size:13px;padding:8px 0}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left,.topbar-right{display:flex;align-items:center;gap:20px}
+.topbar a{color:rgba(255,255,255,.85);display:flex;align-items:center;gap:6px;transition:color .2s}
+.topbar a:hover{color:#fff}
+.topbar svg{width:15px;height:15px}
+.topbar-social{display:flex;gap:12px}
+.topbar-social a{color:rgba(255,255,255,.7);transition:color .2s}
+.topbar-social a:hover{color:var(--lime)}
+
+/* ─── HEADER ─── */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E8F3EF;box-shadow:0 2px 20px rgba(15,110,86,.08)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:40px;height:40px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-name{font-size:18px;font-weight:900;color:var(--teal-dark);letter-spacing:-.5px}
+.logo-sub{font-size:10px;font-weight:500;color:var(--teal-mid);letter-spacing:.12em;text-transform:uppercase}
+
+/* NAV */
+nav{display:flex;align-items:center;gap:4px}
+.nav-item{position:relative}
+.nav-link{padding:8px 14px;font-size:14px;font-weight:500;color:var(--text-mid);border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.nav-link:hover,.nav-link.active{color:var(--teal-dark);background:var(--bg-light)}
+.nav-link svg{width:14px;height:14px;transition:transform .2s}
+.nav-item:hover .nav-link svg{transform:rotate(180deg)}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:220px;background:#fff;border:1px solid #E8F3EF;border-radius:var(--radius);box-shadow:var(--shadow);padding:8px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .2s}
+.nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
+.dropdown a{display:block;padding:10px 14px;font-size:13px;color:var(--text-mid);border-radius:8px;transition:all .15s}
+.dropdown a:hover{color:var(--teal-dark);background:var(--bg-light)}
+.header-cta{background:var(--teal-dark);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s;white-space:nowrap}
+.header-cta:hover{background:var(--teal-mid);transform:translateY(-1px)}
+.mobile-toggle{display:none;flex-direction:column;gap:5px;padding:6px;cursor:pointer}
+.mobile-toggle span{width:24px;height:2px;background:var(--teal-dark);border-radius:2px;transition:all .3s}
+
+/* ─── HERO ─── */
+.hero{position:relative;height:90vh;min-height:560px;max-height:800px;overflow:hidden;background:var(--bg-dark)}
+.hero-slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .8s ease;pointer-events:none}
+.hero-slide.active{opacity:1;pointer-events:all}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0A1F18 0%,#0F3D2E 50%,#0A1F18 100%)}
+.hero-pattern{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Crect x='0' y='54' width='6' height='6'/%3E%3Crect x='12' y='42' width='6' height='18'/%3E%3Crect x='24' y='30' width='6' height='30'/%3E%3Crect x='36' y='18' width='6' height='42'/%3E%3Crect x='48' y='6' width='6' height='54'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat}
+.hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(29,158,117,.20) 0%,transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(168,200,58,.15);border:1px solid rgba(168,200,58,.3);color:var(--lime);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1.5px;max-width:700px;margin-bottom:20px}
+.hero h1 .accent{color:var(--lime)}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.7);max-width:540px;line-height:1.7;margin-bottom:36px}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--lime);color:var(--bg-dark);padding:14px 28px;border-radius:8px;font-size:15px;font-weight:700;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:#BDD840;transform:translateY(-2px)}
+.btn-outline{border:2px solid rgba(255,255,255,.3);color:#fff;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:500;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08)}
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:400px;opacity:.15;pointer-events:none}
+.hero-dots{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none}
+.hero-dot.active{background:var(--lime);width:24px;border-radius:4px}
+.hero-arrows{position:absolute;bottom:28px;right:40px;display:flex;gap:8px;z-index:3}
+.hero-arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer;background:rgba(255,255,255,.05)}
+.hero-arrow:hover{border-color:var(--lime);color:var(--lime);background:rgba(168,200,58,.1)}
+.hero-arrow svg{width:18px;height:18px}
+
+/* MINI CHART anim */
+.chart-bars{display:flex;align-items:flex-end;gap:6px;height:80px;margin-top:16px}
+.bar{width:18px;border-radius:3px 3px 0 0;background:var(--lime);animation:grow 1.5s ease-out forwards;transform-origin:bottom}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+/* ─── SECTION BASE ─── */
+section{padding:90px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:12px}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--text-dark);letter-spacing:-1px;line-height:1.15;margin-bottom:16px}
+.section-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
+.section-header{margin-bottom:56px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+
+/* ─── SOBRE ─── */
+.sobre{background:var(--bg-light)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.sobre-img{border-radius:20px;overflow:hidden;position:relative}
+.sobre-img-inner{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--teal-mid) 100%);height:420px;border-radius:20px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.sobre-img-inner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(255,255,255,.05)'/%3E%3C/svg%3E") repeat}
+.sobre-stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:absolute;inset:20px}
+.scard{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.scard-num{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px}
+.scard-label{font-size:11px;color:rgba(255,255,255,.7);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.scard-accent{color:var(--lime)}
+.sobre-content p{font-size:1rem;color:var(--text-mid);line-height:1.8;margin-bottom:16px}
+.sobre-list{margin:24px 0 32px}
+.sobre-list li{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #E8F3EF;font-size:14px;color:var(--text-mid)}
+.sobre-list li:last-child{border-bottom:none}
+.check{width:20px;height:20px;background:var(--teal-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.check svg{width:11px;height:11px;color:#fff}
+.btn-teal{background:var(--teal-dark);color:#fff;padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-teal:hover{background:var(--teal-mid);transform:translateY(-1px)}
+
+/* ─── STATS BAR ─── */
+.statsbar{background:var(--teal-dark);padding:48px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
+.stat-item{padding:16px 24px;border-right:1px solid rgba(255,255,255,.15)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:-2px;display:block}
+.stat-num span{color:var(--lime)}
+.stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px;display:block}
+
+/* ─── SERVIÇOS ─── */
+.servicos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.servico-card{background:#fff;border:1px solid #E8F3EF;border-radius:16px;padding:32px 28px;transition:all .3s;position:relative;overflow:hidden}
+.servico-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--teal-dark),var(--teal-mid));opacity:0;transition:opacity .3s}
+.servico-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(15,110,86,.15);border-color:var(--teal-mid)}
+.servico-card:hover::before{opacity:1}
+.servico-card:hover .servico-icon,.servico-card:hover .servico-title,.servico-card:hover .servico-text,.servico-card:hover .servico-link{color:#fff;position:relative;z-index:1}
+.servico-card:hover .servico-icon-wrap{background:rgba(255,255,255,.15)}
+.servico-card:hover .servico-link{color:var(--lime)}
+.servico-icon-wrap{width:52px;height:52px;background:var(--bg-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .3s;position:relative;z-index:1}
+.servico-icon{width:26px;height:26px;color:var(--teal-dark);transition:color .3s}
+.servico-title{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:10px;transition:color .3s;position:relative;z-index:1}
+.servico-text{font-size:13.5px;color:var(--text-mid);line-height:1.7;margin-bottom:20px;transition:color .3s;position:relative;z-index:1}
+.servico-link{font-size:13px;font-weight:600;color:var(--teal-dark);display:flex;align-items:center;gap:6px;transition:color .3s;position:relative;z-index:1}
+.servico-link svg{width:14px;height:14px}
+
+/* ─── PLATAFORMA ─── */
+.plataforma{background:var(--bg-dark);color:#fff}
+.plataforma .section-eyebrow{color:var(--lime)}
+.plataforma .section-title{color:#fff}
+.plataforma .section-sub{color:rgba(255,255,255,.65)}
+.plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.plat-features{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.plat-feat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;transition:all .25s}
+.plat-feat:hover{background:rgba(29,158,117,.12);border-color:rgba(29,158,117,.3)}
+.plat-feat-icon{width:36px;height:36px;background:rgba(168,200,58,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.plat-feat-icon svg{width:18px;height:18px;color:var(--lime)}
+.plat-feat h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.plat-feat p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.plat-mockup{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
+.plat-bar{background:rgba(255,255,255,.06);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.plat-dot{width:10px;height:10px;border-radius:50%}
+.plat-bar-title{font-size:12px;color:rgba(255,255,255,.4);margin-left:8px}
+.plat-content{padding:20px}
+.plat-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.plat-kpi{background:rgba(255,255,255,.06);border-radius:10px;padding:14px;text-align:center}
+.plat-kpi-val{font-size:20px;font-weight:900;color:#fff;letter-spacing:-1px}
+.plat-kpi-val.g{color:var(--lime)}
+.plat-kpi-val.t{color:#9FE1CB}
+.plat-kpi-lbl{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+.plat-chart-area{background:rgba(255,255,255,.04);border-radius:10px;padding:14px;height:110px;display:flex;align-items:flex-end;gap:5px}
+.plat-bar-chart{flex:1;border-radius:3px 3px 0 0;min-height:10px}
+.plat-roles{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.role-badge{font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55)}
+
+/* ─── PLANOS ─── */
+.planos{background:var(--bg-light)}
+.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.plano-card{background:#fff;border:1.5px solid #E8F3EF;border-radius:20px;padding:36px 28px;text-align:center;transition:all .3s;position:relative}
+.plano-card.featured{border-color:var(--teal-dark);box-shadow:0 0 0 4px rgba(15,110,86,.08)}
+.plano-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal-dark);color:#fff;font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;white-space:nowrap;letter-spacing:.06em}
+.plano-name{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:8px}
+.plano-price{font-size:2.6rem;font-weight:900;color:var(--text-dark);letter-spacing:-2px;line-height:1}
+.plano-price sup{font-size:1rem;font-weight:600;letter-spacing:0}
+.plano-price sub{font-size:14px;font-weight:500;color:var(--text-light);letter-spacing:0}
+.plano-desc{font-size:13px;color:var(--text-mid);margin:12px 0 24px;line-height:1.6}
+.plano-divider{height:1px;background:#E8F3EF;margin:20px 0}
+.plano-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-mid);padding:7px 0;text-align:left}
+.plano-list .check{width:18px;height:18px;flex-shrink:0}
+.plano-list .x-icon{width:18px;height:18px;border-radius:50%;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.plano-list .x-icon svg{width:10px;height:10px;color:#EF4444}
+.plano-btn{width:100%;margin-top:28px;padding:13px;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s}
+.plano-btn-primary{background:var(--teal-dark);color:#fff}
+.plano-btn-primary:hover{background:var(--teal-mid)}
+.plano-btn-outline{background:#fff;color:var(--teal-dark);border:2px solid #E8F3EF}
+.plano-btn-outline:hover{border-color:var(--teal-dark)}
+
+/* ─── CONTATO ─── */
+.contato-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
+.contato-info h3{font-size:1.4rem;font-weight:700;color:var(--text-dark);margin-bottom:12px}
+.contato-info p{font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:28px}
+.contato-items{display:flex;flex-direction:column;gap:16px}
+.contato-item{display:flex;align-items:center;gap:14px}
+.ci-icon{width:44px;height:44px;background:var(--bg-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-icon svg{width:20px;height:20px;color:var(--teal-dark)}
+.ci-label{font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.ci-val{font-size:14px;color:var(--text-dark);font-weight:500;margin-top:2px}
+.form-card{background:#fff;border:1px solid #E8F3EF;border-radius:20px;padding:36px;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 14px;border:1.5px solid #E8F3EF;border-radius:8px;font-size:14px;font-family:inherit;color:var(--text-dark);outline:none;transition:border-color .2s;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--teal-mid)}
+textarea{resize:vertical;min-height:110px}
+.form-btn{width:100%;padding:14px;background:var(--teal-dark);color:#fff;border-radius:8px;font-size:15px;font-weight:700;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
+.form-btn:hover{background:var(--teal-mid);transform:translateY(-1px)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg-dark);color:rgba(255,255,255,.6);padding:64px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:13px;line-height:1.8;margin:16px 0 24px;max-width:280px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s}
+.footer-social a:hover{border-color:var(--lime);color:var(--lime)}
+.footer-social svg{width:16px;height:16px}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:18px}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul a{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-col ul a:hover{color:var(--lime)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.footer-bottom a{color:var(--lime);transition:opacity .2s}
+.footer-bottom a:hover{opacity:.7}
+.footer-logo-name{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.footer-logo-sub{font-size:9px;color:var(--lime);letter-spacing:.14em;text-transform:uppercase}
+.wpp-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:200;transition:all .2s;color:#fff}
+.wpp-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
+.wpp-float svg{width:28px;height:28px}
+
+/* ─── MOBILE NAV ─── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1000;background:#fff;overflow-y:auto;padding:24px}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.mobile-close{width:36px;height:36px;border-radius:8px;border:1px solid #E8F3EF;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.mobile-close svg{width:18px;height:18px;color:var(--text-dark)}
+.mobile-nav-link{display:block;padding:14px 0;font-size:16px;font-weight:500;color:var(--text-dark);border-bottom:1px solid #F0F7F4}
+.mobile-nav-link:hover{color:var(--teal-dark)}
+.mobile-nav-sub{padding:6px 0 6px 16px}
+.mobile-nav-sub a{display:block;padding:10px 0;font-size:14px;color:var(--text-mid)}
+.mobile-cta{margin-top:28px;background:var(--teal-dark);color:#fff;padding:14px;border-radius:8px;font-size:15px;font-weight:600;text-align:center;display:block}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+.sobre-grid,.contato-grid,.plat-grid{grid-template-columns:1fr}
+.servicos-grid{grid-template-columns:1fr 1fr}
+.planos-grid{grid-template-columns:1fr}
+.stats-grid{grid-template-columns:1fr 1fr}
+.stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.15)}
+.footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+.sobre-img{order:-1}
+}
+@media(max-width:768px){
+nav,.header-cta{display:none}
+.mobile-toggle{display:flex}
+.hero h1{font-size:2rem}
+.hero-visual{display:none}
+.plat-features,.plat-kpi-row,.form-row{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+.servicos-grid{grid-template-columns:1fr}
+.topbar-right{display:none}
+.footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <a href="tel:+5521999999999">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        (21) 9 9999-9999
+      </a>
+      <a href="mailto:contato@transformabi.com.br">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        contato@transformabi.com.br
+      </a>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-social">
+        <a href="#" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#0F6E56"/>
+        <rect x="6" y="24" width="6" height="10" rx="2" fill="#9FE1CB"/>
+        <rect x="14" y="18" width="6" height="16" rx="2" fill="#9FE1CB"/>
+        <rect x="22" y="12" width="6" height="22" rx="2" fill="#9FE1CB"/>
+        <polyline points="6,22 12,16 20,10 28,4" stroke="#A8C83A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="28" cy="4" r="2.5" fill="#A8C83A"/>
+        <polyline points="24,4 28,4 28,8" stroke="#A8C83A" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">Transforma BI</span>
+        <span class="logo-sub">Business Intelligence</span>
+      </div>
+    </a>
+    <nav>
+      <div class="nav-item">
+        <a href="/" class="nav-link active">Home</a>
+      </div>
+      <div class="nav-item">
+        <a href="#sobre" class="nav-link">Sobre</a>
+      </div>
+      <div class="nav-item">
+        <a href="#servicos" class="nav-link">Serviços
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="#servicos">Plataforma SaaS</a>
+          <a href="#servicos">Módulo de RH e DP</a>
+          <a href="#servicos">Análise de Vendas</a>
+          <a href="#servicos">Gestão Financeira</a>
+          <a href="#servicos">Logística</a>
+          <a href="#servicos">Performance por Equipe</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#plataforma" class="nav-link">Plataforma</a>
+      </div>
+      <div class="nav-item">
+        <a href="#planos" class="nav-link">Planos</a>
+      </div>
+      <div class="nav-item">
+        <a href="#contato" class="nav-link">Contato</a>
+      </div>
+    </nav>
+    <a href="#contato" class="header-cta">Fale Conosco</a>
+    <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <div class="logo-text">
+      <span class="logo-name" style="color:var(--teal-dark)">Transforma BI</span>
+    </div>
+    <button class="mobile-close" onclick="closeMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <a href="/" class="mobile-nav-link">Home</a>
+  <a href="#sobre" class="mobile-nav-link" onclick="closeMobileMenu()">Sobre</a>
+  <a href="#servicos" class="mobile-nav-link" onclick="closeMobileMenu()">Serviços</a>
+  <a href="#plataforma" class="mobile-nav-link" onclick="closeMobileMenu()">Plataforma</a>
+  <a href="#planos" class="mobile-nav-link" onclick="closeMobileMenu()">Planos</a>
+  <a href="#contato" class="mobile-nav-link" onclick="closeMobileMenu()">Contato</a>
+  <a href="#contato" class="mobile-cta" onclick="closeMobileMenu()">Fale Conosco</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <!-- SLIDE 1 -->
+  <div class="hero-slide active" id="slide-0">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span></span>Plataforma de Business Intelligence</div>
+      <h1>Transforme dados em <span class="accent">decisões estratégicas</span></h1>
+      <p class="hero-sub">Do RH ao CEO: uma plataforma completa que entrega visibilidade total do seu negócio em tempo real, para empresas de qualquer tamanho.</p>
+      <div class="hero-buttons">
+        <a href="#contato" class="btn-primary">Agendar Demonstração
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#servicos" class="btn-outline">Conhecer Módulos</a>
+      </div>
+    </div>
+  </div>
+  <!-- SLIDE 2 -->
+  <div class="hero-slide" id="slide-1">
+    <div class="hero-bg" style="background:linear-gradient(135deg,#0A1628 0%,#0C2B40 50%,#0A1628 100%)"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-glow" style="background:radial-gradient(circle,rgba(168,200,58,.20) 0%,transparent 70%)"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow" style="color:#A8C83A;border-color:rgba(168,200,58,.3)"><span></span>164+ Insights Disponíveis</div>
+      <h1>Inteligência para <span class="accent">cada área</span> da empresa</h1>
+      <p class="hero-sub">RH, DP, Financeiro, Logística, Vendas e Performance — todos os dados unificados em uma única plataforma SaaS multi-nível.</p>
+      <div class="hero-buttons">
+        <a href="#servicos" class="btn-primary">Ver Módulos
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#planos" class="btn-outline">Ver Planos</a>
+      </div>
+    </div>
+  </div>
+  <!-- SLIDE 3 -->
+  <div class="hero-slide" id="slide-2">
+    <div class="hero-bg" style="background:linear-gradient(135deg,#0F3D2E 0%,#0A2818 50%,#0F3D2E 100%)"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span></span>White-Label para Empresas</div>
+      <h1>Seu BI com a <span class="accent">sua identidade</span> visual</h1>
+      <p class="hero-sub">Ofereça dashboards personalizados com a logo e as cores da sua empresa. Solução white-label completa para consultorias e empresas de BI.</p>
+      <div class="hero-buttons">
+        <a href="#contato" class="btn-primary">Falar com Especialista
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#planos" class="btn-outline">Ver Planos</a>
+      </div>
+    </div>
+  </div>
+  <!-- CONTROLS -->
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goSlide(0)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="goSlide(1)" aria-label="Slide 2"></button>
+    <button class="hero-dot" onclick="goSlide(2)" aria-label="Slide 3"></button>
+  </div>
+  <div class="hero-arrows">
+    <button class="hero-arrow" onclick="prevSlide()" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="hero-arrow" onclick="nextSlide()" aria-label="Próximo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="statsbar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num" data-target="164">0<span>+</span></span>
+        <span class="stat-label">Insights disponíveis</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Módulos integrados</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Níveis de acesso</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100<span>%</span></span>
+        <span class="stat-label">Baseado em nuvem</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-img">
+        <div class="sobre-img-inner">
+          <div class="scard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px;width:100%;height:100%;align-content:center">
+            <div class="scard"><span class="scard-num scard-accent">164+</span><span class="scard-label">Insights</span></div>
+            <div class="scard"><span class="scard-num">99<span style="font-size:16px">%</span></span><span class="scard-label">Uptime</span></div>
+            <div class="scard"><span class="scard-num">8</span><span class="scard-label">Módulos</span></div>
+            <div class="scard"><span class="scard-num scard-accent">∞</span><span class="scard-label">Usuários</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-content">
+        <p class="section-eyebrow">Sobre a Transforma BI</p>
+        <h2 class="section-title">Business Intelligence que <span style="color:var(--teal-mid)">transforma</span> seu negócio</h2>
+        <p>A Transforma BI nasceu com um propósito claro: democratizar o acesso a dados inteligentes para empresas de todos os tamanhos. Nossa plataforma SaaS entrega visualizações completas, desde o chão de fábrica até a sala do CEO.</p>
+        <p>Com módulos especializados para cada área do negócio e níveis de acesso customizáveis, cada colaborador vê exatamente o que precisa, no momento certo, de qualquer dispositivo.</p>
+        <ul class="sobre-list">
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Plataforma multi-tenant com white-label por cliente
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Importação de dados via CSV e XLSX com validação automática
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Envio de contracheques por WhatsApp e e-mail
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Dashboards em tempo real com 164+ indicadores
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Login via Google, e-mail ou telefone (OTP)
+          </li>
+        </ul>
+        <a href="#contato" class="btn-teal">Agendar Demonstração
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="section-header center">
+      <p class="section-eyebrow">Nossos Módulos</p>
+      <h2 class="section-title">Soluções completas de Business Intelligence</h2>
+      <p class="section-sub">Cada módulo foi projetado para entregar os insights mais relevantes de cada área, de forma integrada e em tempo real.</p>
+    </div>
+    <div class="servicos-grid">
+      <!-- Card 1 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 class="servico-title">Plataforma SaaS Completa</h3>
+        <p class="servico-text">Dashboard unificado com visibilidade de todas as áreas. Acesso segmentado por nível, do operacional ao CEO, com white-label por cliente.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Card 2 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="servico-title">RH e Departamento Pessoal</h3>
+        <p class="servico-text">Gestão completa de colaboradores, turnover, férias, afastamentos, banco de horas, contracheques e envio automatizado por WhatsApp ou e-mail.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Card 3 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="servico-title">Análise de Vendas</h3>
+        <p class="servico-text">Faturamento, ticket médio, metas vs realizado, ranking de vendedores, forecast e performance por equipe, UF e canal de venda.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Card 4 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <h3 class="servico-title">Gestão Financeira</h3>
+        <p class="servico-text">Contas a pagar e receber, fluxo de caixa, DRE simplificado, projeção de saldo, inadimplência e alertas automáticos de vencimentos.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Card 5 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="servico-title">Logística e Operações</h3>
+        <p class="servico-text">Controle de frota, OTD, custo por entrega, disponibilidade de veículos, rotas por UF, manutenções preventivas e produtividade por motorista.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Card 6 -->
+      <div class="servico-card">
+        <div class="servico-icon-wrap">
+          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 class="servico-title">Performance por Equipe</h3>
+        <p class="servico-text">NPS, absenteísmo, matriz 9-box, ranking de lideranças, score por UF, top performers e colaboradores abaixo da meta — tudo em um painel.</p>
+        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATAFORMA -->
+<section class="plataforma" id="plataforma">
+  <div class="container">
+    <div class="plat-grid">
+      <div>
+        <p class="section-eyebrow">Nossa Plataforma</p>
+        <h2 class="section-title">Do funcionário <br>ao CEO — em <span style="color:var(--lime)">tempo real</span></h2>
+        <p class="section-sub" style="margin-bottom:40px">Oito níveis de acesso distintos garantem que cada pessoa veja exatamente o que precisa — sem excesso, sem falta de informação.</p>
+        <div class="plat-features">
+          <div class="plat-feat">
+            <div class="plat-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4>Multi-tenant seguro</h4>
+            <p>Isolamento total de dados por empresa com RLS.</p>
+          </div>
+          <div class="plat-feat">
+            <div class="plat-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h4>100% em nuvem</h4>
+            <p>Acesse de qualquer dispositivo, a qualquer hora.</p>
+          </div>
+          <div class="plat-feat">
+            <div class="plat-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h4>Dados em tempo real</h4>
+            <p>Indicadores atualizados automaticamente.</p>
+          </div>
+          <div class="plat-feat">
+            <div class="plat-feat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            </div>
+            <h4>White-label completo</h4>
+            <p>Logo e paleta de cores por cliente.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="plat-mockup">
+          <div class="plat-bar">
+            <div class="plat-dot" style="background:#FF5F57"></div>
+            <div class="plat-dot" style="background:#FFBD2E"></div>
+            <div class="plat-dot" style="background:#28CA41"></div>
+            <span class="plat-bar-title">Dashboard — Transforma BI</span>
+          </div>
+          <div class="plat-content">
+            <div class="plat-kpi-row">
+              <div class="plat-kpi"><div class="plat-kpi-val g">R$2.4M</div><div class="plat-kpi-lbl">Faturamento</div></div>
+              <div class="plat-kpi"><div class="plat-kpi-val">160</div><div class="plat-kpi-lbl">Funcionários</div></div>
+              <div class="plat-kpi"><div class="plat-kpi-val t">94%</div><div class="plat-kpi-lbl">Meta Atingida</div></div>
+            </div>
+            <div class="plat-chart-area">
+              <div class="plat-bar-chart" style="height:35%;background:rgba(168,200,58,.4)"></div>
+              <div class="plat-bar-chart" style="height:55%;background:rgba(168,200,58,.5)"></div>
+              <div class="plat-bar-chart" style="height:45%;background:rgba(168,200,58,.4)"></div>
+              <div class="plat-bar-chart" style="height:70%;background:rgba(168,200,58,.6)"></div>
+              <div class="plat-bar-chart" style="height:60%;background:rgba(168,200,58,.5)"></div>
+              <div class="plat-bar-chart" style="height:80%;background:rgba(168,200,58,.7)"></div>
+              <div class="plat-bar-chart" style="height:75%;background:rgba(168,200,58,.65)"></div>
+              <div class="plat-bar-chart" style="height:90%;background:var(--lime)"></div>
+            </div>
+            <div class="plat-roles">
+              <span class="role-badge">Funcionário</span>
+              <span class="role-badge">RH</span>
+              <span class="role-badge">Gestor</span>
+              <span class="role-badge">Financeiro</span>
+              <span class="role-badge">Logística</span>
+              <span class="role-badge">CEO</span>
+              <span class="role-badge" style="border-color:rgba(168,200,58,.4);color:var(--lime)">Owner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="planos" id="planos">
+  <div class="container">
+    <div class="section-header center">
+      <p class="section-eyebrow">Nossos Planos</p>
+      <h2 class="section-title">Escolha o plano ideal para a sua empresa</h2>
+      <p class="section-sub">Todos os planos incluem suporte, atualizações e acesso à plataforma completa. Sem taxas escondidas.</p>
+    </div>
+    <div class="planos-grid">
+      <!-- Starter -->
+      <div class="plano-card">
+        <div class="plano-name">Starter</div>
+        <div class="plano-price"><sup>R$</sup>297<sub>/mês</sub></div>
+        <p class="plano-desc">Ideal para pequenas empresas que querem começar com inteligência de dados.</p>
+        <div class="plano-divider"></div>
+        <ul class="plano-list">
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Até 50 funcionários</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Módulos: RH + DP + Contracheque</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Banco de horas</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Login Google/e-mail/telefone</li>
+          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">Módulos de Vendas e Logística</span></li>
+          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">White-label</span></li>
+        </ul>
+        <button class="plano-btn plano-btn-outline">Começar Agora</button>
+      </div>
+      <!-- Business (featured) -->
+      <div class="plano-card featured">
+        <div class="plano-badge">MAIS POPULAR</div>
+        <div class="plano-name">Business</div>
+        <div class="plano-price"><sup>R$</sup>697<sub>/mês</sub></div>
+        <p class="plano-desc">Para empresas em crescimento que precisam de visibilidade completa de todas as áreas.</p>
+        <div class="plano-divider"></div>
+        <ul class="plano-list">
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Funcionários ilimitados</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Todos os 8 módulos inclusos</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>164+ insights e indicadores</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Envio por WhatsApp e e-mail</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Upload de CSV/XLSX</li>
+          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">White-label personalizado</span></li>
+        </ul>
+        <button class="plano-btn plano-btn-primary">Começar Agora</button>
+      </div>
+      <!-- Enterprise -->
+      <div class="plano-card">
+        <div class="plano-name">Enterprise</div>
+        <div class="plano-price" style="font-size:2rem">Sob<br>Consulta</div>
+        <p class="plano-desc">Para consultorias e empresas que querem revender a plataforma com identidade própria.</p>
+        <div class="plano-divider"></div>
+        <ul class="plano-list">
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Multi-empresa (multi-tenant)</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>White-label completo</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Paleta de cores por cliente</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Painel exclusivo do Owner</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Suporte prioritário dedicado</li>
+          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Onboarding personalizado</li>
+        </ul>
+        <button class="plano-btn plano-btn-outline">Falar com Especialista</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-grid">
+      <div class="contato-info">
+        <p class="section-eyebrow">Fale Conosco</p>
+        <h2 class="section-title">Pronto para transformar seus dados?</h2>
+        <p>Entre em contato com nossa equipe. Vamos entender as necessidades da sua empresa e mostrar como a Transforma BI pode ajudar.</p>
+        <div class="contato-items">
+          <div class="contato-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Telefone / WhatsApp</div>
+              <div class="ci-val">(21) 9 9999-9999</div>
+            </div>
+          </div>
+          <div class="contato-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">E-mail</div>
+              <div class="ci-val">contato@transformabi.com.br</div>
+            </div>
+          </div>
+          <div class="contato-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Atendimento</div>
+              <div class="ci-val">Seg–Sex, 8h às 18h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form onsubmit="handleForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" placeholder="Nome da empresa">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="tel">Telefone</label>
+              <input type="tel" id="tel" placeholder="(00) 00000-0000">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label for="interesse">Interesse</label>
+            <select id="interesse">
+              <option value="">Selecione um módulo de interesse</option>
+              <option>Plataforma completa</option>
+              <option>Módulo de RH e DP</option>
+              <option>Análise de Vendas</option>
+              <option>Gestão Financeira</option>
+              <option>Logística</option>
+              <option>Performance por Equipe</option>
+              <option>Plano Enterprise / White-label</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="msg">Mensagem</label>
+            <textarea id="msg" placeholder="Conte um pouco sobre sua empresa e o que precisa..."></textarea>
+          </div>
+          <button type="submit" class="form-btn">
+            Enviar Mensagem
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+        <div id="form-success" style="display:none;text-align:center;padding:20px">
+          <div style="width:52px;height:52px;background:#E1F5EE;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4 style="font-size:16px;font-weight:600;color:var(--text-dark);margin-bottom:8px">Mensagem enviada!</h4>
+          <p style="font-size:14px;color:var(--text-mid)">Retornaremos em até 24 horas úteis. Obrigado pelo contato!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">
+          <span class="footer-logo-name">Transforma BI</span>
+          <span class="footer-logo-sub">Business Intelligence</span>
+        </div>
+        <p>Plataforma SaaS completa de Business Intelligence. Do funcionário ao CEO, visibilidade total do seu negócio em tempo real.</p>
+        <div class="footer-social">
+          <a href="#" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" title="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </a>
+          <a href="#" title="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Módulos</h4>
+        <ul>
+          <li><a href="#servicos">RH e DP</a></li>
+          <li><a href="#servicos">Contracheque</a></li>
+          <li><a href="#servicos">Banco de Horas</a></li>
+          <li><a href="#servicos">Análise de Vendas</a></li>
+          <li><a href="#servicos">Logística</a></li>
+          <li><a href="#servicos">Financeiro</a></li>
+          <li><a href="#servicos">Performance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Trabalhe Conosco</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="tel:+5521999999999">(21) 9 9999-9999</a></li>
+          <li><a href="mailto:contato@transformabi.com.br">contato@transformabi.com.br</a></li>
+          <li><a href="#">Rio de Janeiro, RJ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Transforma BI. Todos os direitos reservados.</span>
+      <div style="display:flex;gap:20px">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5521999999999?text=Olá! Tenho interesse na Transforma BI." class="wpp-float" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ─── HERO SLIDER ───
+let current=0,total=3,timer;
+function goSlide(n){
+  document.getElementById('slide-'+current).classList.remove('active');
+  document.querySelectorAll('.hero-dot')[current].classList.remove('active');
+  current=n;
+  document.getElementById('slide-'+current).classList.add('active');
+  document.querySelectorAll('.hero-dot')[current].classList.add('active');
+  resetTimer();
+}
+function nextSlide(){goSlide((current+1)%total)}
+function prevSlide(){goSlide((current-1+total)%total)}
+function resetTimer(){clearInterval(timer);timer=setInterval(nextSlide,5000)}
+resetTimer();
+
+// ─── MOBILE MENU ───
+function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden'}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow=''}
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  })
+});
+
+// ─── COUNTER ANIMATION ───
+function animateCounters(){
+  document.querySelectorAll('.stat-num[data-target]').forEach(el=>{
+    const target=+el.dataset.target;
+    const suffix=el.innerHTML.includes('+')?'+':'';
+    let start=0;
+    const step=()=>{
+      start=Math.min(start+Math.ceil(target/40),target);
+      el.innerHTML=start+(suffix?'<span>'+suffix+'</span>':'');
+      if(start<target)requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateCounters();observer.disconnect()}});
+},{threshold:.3});
+const statsEl=document.querySelector('.statsbar');
+if(statsEl)observer.observe(statsEl);
+
+// ─── FORM ───
+function handleForm(e){
+  e.preventDefault();
+  const form=e.target;
+  form.style.display='none';
+  document.getElementById('form-success').style.display='block';
+}
+
+// ─── HEADER SHADOW ON SCROLL ───
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').style.boxShadow=
+    window.scrollY>10?'0 4px 32px rgba(15,110,86,.12)':'0 2px 20px rgba(15,110,86,.08)';
+});
+</script>
+</body>
+</html>
