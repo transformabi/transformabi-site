@@ -97,8 +97,6 @@
     .logo-img {
       height: 52px;
       width: auto;
-      /* Remove fundo branco da logo via mix-blend-mode */
-      mix-blend-mode: screen;
       filter: drop-shadow(0 0 6px rgba(168,200,58,0.3));
       transition: filter 0.3s;
     }
@@ -616,10 +614,10 @@
   <!-- ── NAVBAR ─────────────────────────── -->
   <nav>
     <a href="#" class="logo-wrap">
-      <!-- Logo Transforma BI — sem fundo via mix-blend-mode:screen -->
+      <!-- Logo Transforma BI — fundo transparente nativo -->
       <img
         class="logo-img"
-        src="logo.png"
+        src="transforma_bi_logo.png"
         alt="Transforma BI"
         onerror="this.style.display='none'"
       >
@@ -758,11 +756,11 @@
   <section id="nexora">
     <div class="nexora-card">
       <div class="nexora-logo-wrap">
-        <!-- Logo Nexora SVG — sem fundo, escalável -->
-        <svg width="52" height="52" viewBox="0 0 40 40" fill="none">
-          <polygon points="20,1 38,11 38,29 20,39 2,29 2,11" fill="#0F6E56" stroke="#1D9E75" stroke-width="1.5"/>
-          <path d="M11 29V11h3.5L24 24.5V11H27.5V29H24L14.5 15.5V29Z" fill="#A8C83A"/>
-        </svg>
+        <img
+          src="NEXORA_logo.png"
+          alt="NEXORA"
+          style="height:72px;width:auto;filter:drop-shadow(0 0 14px rgba(29,158,117,0.35));"
+        >
         <span class="nexora-name">NEXORA</span>
       </div>
       <span class="section-tag">Plataforma SaaS</span>
