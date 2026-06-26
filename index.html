@@ -1,752 +1,1084 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Transforma BI é uma plataforma completa de Business Intelligence com módulos de RH, Financeiro, Logística, Vendas e muito mais. Do funcionário ao CEO, visibilidade total do seu negócio.">
-<meta name="keywords" content="Business Intelligence, BI, RH, Financeiro, Logística, Vendas, Dashboard, SaaS, Analytics">
-<meta property="og:title" content="Transforma BI — Business Intelligence Completo">
-<meta property="og:description" content="Plataforma SaaS de BI com módulos de RH, DP, Financeiro, Logística e Vendas. Visibilidade total do seu negócio.">
-<meta property="og:type" content="website">
-<title>Transforma BI — Business Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-<style>
-/* ─── RESET & BASE ─── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:#1A2B2A;background:#fff;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-ul{list-style:none}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transforma BI | Consultoria em Business Intelligence no Rio de Janeiro</title>
+  <meta name="description" content="A Transforma BI transforma dados em decisões. Consultoria em Business Intelligence, dashboards personalizados e análise de dados para empresas no Rio de Janeiro.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Transforma BI">
+  <meta name="geo.region" content="BR-RJ">
+  <meta name="geo.placename" content="Rio de Janeiro">
+  <link rel="canonical" href="https://transformabi.com.br/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Transforma BI | Consultoria em Business Intelligence no RJ">
+  <meta property="og:description" content="Transformamos dados em decisões estratégicas. Dashboards personalizados e relatórios gerenciais para empresas no Rio de Janeiro.">
+  <meta property="og:url" content="https://transformabi.com.br/">
+  <meta property="og:site_name" content="Transforma BI">
+  <!-- Google Search Console: substitua pelo seu código -->
+  <!-- <meta name="google-site-verification" content="SEU_CODIGO_AQUI"> -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "name": "Transforma BI",
+    "description": "Consultoria em Business Intelligence especializada em dashboards personalizados e análise de dados para empresas no Rio de Janeiro.",
+    "url": "https://transformabi.com.br",
+    "telephone": "+55-21-97685-2478",
+    "email": "transformabirj@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rio de Janeiro",
+      "addressRegion": "RJ",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/transformabi_oficial/",
+      "https://www.linkedin.com/company/107956130/"
+    ]
+  }
+  </script>
 
-/* ─── VARS ─── */
-:root{
-  --teal-dark:#0F6E56;
-  --teal-mid:#1D9E75;
-  --teal-light:#9FE1CB;
-  --lime:#A8C83A;
-  --lime-dark:#7A9B28;
-  --bg-light:#F4FAF7;
-  --bg-dark:#0A1F18;
-  --text-dark:#1A2B2A;
-  --text-mid:#4A6360;
-  --text-light:#7A9B98;
-  --white:#FFFFFF;
-  --radius:12px;
-  --shadow:0 4px 24px rgba(15,110,86,.10);
-}
+  <style>
+    /* ─── RESET & BASE ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0A1F18;
+      --teal:     #0F6E56;
+      --mid:      #1D9E75;
+      --lime:     #A8C83A;
+      --txt:      #E8F5F0;
+      --muted:    rgba(232,245,240,0.6);
+      --card:     rgba(15,110,86,0.18);
+      --border:   rgba(29,158,117,0.25);
+      --glow:     rgba(168,200,58,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-/* ─── TOPBAR ─── */
-.topbar{background:var(--teal-dark);color:#fff;font-size:13px;padding:8px 0}
-.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.topbar-left,.topbar-right{display:flex;align-items:center;gap:20px}
-.topbar a{color:rgba(255,255,255,.85);display:flex;align-items:center;gap:6px;transition:color .2s}
-.topbar a:hover{color:#fff}
-.topbar svg{width:15px;height:15px}
-.topbar-social{display:flex;gap:12px}
-.topbar-social a{color:rgba(255,255,255,.7);transition:color .2s}
-.topbar-social a:hover{color:var(--lime)}
+    /* ─── PARTICLE CANVAS ─────────────────────── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-/* ─── HEADER ─── */
-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E8F3EF;box-shadow:0 2px 20px rgba(15,110,86,.08)}
-.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:80px;height:80px;object-fit:contain}
-.logo-text{display:flex;flex-direction:column;line-height:1} .logo-hide{display:none}
-.logo-name{font-size:18px;font-weight:900;color:var(--teal-dark);letter-spacing:-.5px}
-.logo-sub{font-size:10px;font-weight:500;color:var(--teal-mid);letter-spacing:.12em;text-transform:uppercase}
+    /* ─── LAYOUT WRAPPER ─────────────────────── */
+    .wrapper { position: relative; z-index: 1; }
 
-/* NAV */
-nav{display:flex;align-items:center;gap:4px}
-.nav-item{position:relative}
-.nav-link{padding:8px 14px;font-size:14px;font-weight:500;color:var(--text-mid);border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.nav-link:hover,.nav-link.active{color:var(--teal-dark);background:var(--bg-light)}
-.nav-link svg{width:14px;height:14px;transition:transform .2s}
-.nav-item .nav-link svg{transition:transform .2s}.nav-item.open .nav-link svg{transform:rotate(180deg)}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:220px;background:#fff;border:1px solid #E8F3EF;border-radius:var(--radius);box-shadow:var(--shadow);padding:8px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .2s}
-.nav-item.open .dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
-.dropdown a{display:block;padding:10px 14px;font-size:13px;color:var(--text-mid);border-radius:8px;transition:all .15s}
-.dropdown a:hover{color:var(--teal-dark);background:var(--bg-light)}
-.header-cta{background:var(--teal-dark);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s;white-space:nowrap}
-.header-cta:hover{background:var(--teal-mid);transform:translateY(-1px)}
-.mobile-toggle{display:none;flex-direction:column;gap:5px;padding:6px;cursor:pointer}
-.mobile-toggle span{width:24px;height:2px;background:var(--teal-dark);border-radius:2px;transition:all .3s}
+    /* ─── NAVBAR ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(10,31,24,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .logo-img {
+      height: 52px;
+      width: auto;
+      /* Remove fundo branco da logo via mix-blend-mode */
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 6px rgba(168,200,58,0.3));
+      transition: filter 0.3s;
+    }
+    .logo-img:hover { filter: drop-shadow(0 0 12px rgba(168,200,58,0.6)); }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .logo-text strong {
+      color: var(--lime);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+    .logo-text span {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta {
+      background: var(--lime);
+      color: var(--bg) !important;
+      padding: 8px 22px;
+      border-radius: 30px;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+    }
+    .nav-cta:hover { background: #bdd844 !important; color: var(--bg) !important; }
 
+    /* ─── HERO ────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+    }
+    .hero-inner { max-width: 820px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-size: 12px;
+      color: var(--lime);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--txt);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--lime);
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--lime);
+      color: var(--bg);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s;
+      box-shadow: 0 0 30px rgba(168,200,58,0.3);
+    }
+    .btn-primary:hover {
+      background: #bdd844;
+      box-shadow: 0 0 50px rgba(168,200,58,0.5);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: var(--card);
+      color: var(--txt);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+      transform: translateY(-2px);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--lime);
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
 
-/* ─── ANIMATED BACKGROUND ─── */
-#hero-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
-.hero-bg{display:none}
-.hero-content{z-index:3!important}
-.hero-eyebrow,.hero h1,.hero-sub,.hero-buttons{position:relative;z-index:3}
-.hero-dots,.hero-arrows{z-index:4!important}
+    /* ─── SECTION SHARED ─────────────────────── */
+    section { padding: 96px 5%; }
+    .section-tag {
+      display: inline-block;
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--txt);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
 
-/* ─── HERO ─── */
-.hero{position:relative;height:90vh;min-height:560px;max-height:800px;overflow:hidden;background:var(--bg-dark)}
-.hero-slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .8s ease;pointer-events:none}
-.hero-slide.active{opacity:1;pointer-events:all}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0A1F18 0%,#0F3D2E 50%,#0A1F18 100%)}
-.hero-pattern{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Crect x='0' y='54' width='6' height='6'/%3E%3Crect x='12' y='42' width='6' height='18'/%3E%3Crect x='24' y='30' width='6' height='30'/%3E%3Crect x='36' y='18' width='6' height='42'/%3E%3Crect x='48' y='6' width='6' height='54'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat}
-.hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(29,158,117,.20) 0%,transparent 70%);pointer-events:none}
-.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(168,200,58,.15);border:1px solid rgba(168,200,58,.3);color:var(--lime);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
-.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
-.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1.5px;max-width:700px;margin-bottom:20px}
-.hero h1 .accent{color:var(--lime)}
-.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.7);max-width:540px;line-height:1.7;margin-bottom:36px}
-.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{background:var(--lime);color:var(--bg-dark);padding:14px 28px;border-radius:8px;font-size:15px;font-weight:700;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{background:#BDD840;transform:translateY(-2px)}
-.btn-outline{border:2px solid rgba(255,255,255,.3);color:#fff;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:500;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-outline:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08)}
-.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:400px;opacity:.15;pointer-events:none}
-.hero-dots{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none}
-.hero-dot.active{background:var(--lime);width:24px;border-radius:4px}
-.hero-arrows{position:absolute;bottom:28px;right:40px;display:flex;gap:8px;z-index:3}
-.hero-arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer;background:rgba(255,255,255,.05)}
-.hero-arrow:hover{border-color:var(--lime);color:var(--lime);background:rgba(168,200,58,.1)}
-.hero-arrow svg{width:18px;height:18px}
+    /* ─── MODULES / DASHBOARDS ───────────────── */
+    #dashboards { background: rgba(15,110,86,0.04); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .module-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      text-decoration: none;
+      color: var(--txt);
+      display: block;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--glow) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .module-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(168,200,58,0.12);
+    }
+    .module-card:hover::before { opacity: 1; }
+    .module-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .module-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--txt);
+      margin-bottom: 8px;
+    }
+    .module-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .module-arrow {
+      position: absolute;
+      bottom: 22px;
+      right: 22px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--lime);
+      font-size: 14px;
+      transition: all 0.25s;
+    }
+    .module-card:hover .module-arrow {
+      background: var(--lime);
+      color: var(--bg);
+    }
+    .module-badge {
+      display: inline-block;
+      background: rgba(168,200,58,0.15);
+      color: var(--lime);
+      border: 1px solid rgba(168,200,58,0.3);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-/* MINI CHART anim */
-.chart-bars{display:flex;align-items:flex-end;gap:6px;height:80px;margin-top:16px}
-.bar{width:18px;border-radius:3px 3px 0 0;background:var(--lime);animation:grow 1.5s ease-out forwards;transform-origin:bottom}
-@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    /* ─── NEXORA SECTION ─────────────────────── */
+    #nexora {
+      text-align: center;
+    }
+    .nexora-card {
+      background: linear-gradient(135deg, rgba(15,110,86,0.3) 0%, rgba(29,158,117,0.15) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 56px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .nexora-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(168,200,58,0.06) 0%, transparent 60%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.5; }
+      50%       { transform: scale(1.1); opacity: 1; }
+    }
+    .nexora-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .nexora-name {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--lime);
+      letter-spacing: 0.2em;
+    }
 
-/* ─── SECTION BASE ─── */
-section{padding:90px 0}
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-.section-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:12px}
-.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--text-dark);letter-spacing:-1px;line-height:1.15;margin-bottom:16px}
-.section-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
-.section-header{margin-bottom:56px}
-.section-header.center{text-align:center}
-.section-header.center .section-sub{margin:0 auto}
+    /* ─── PRICING / PLANOS ───────────────────── */
+    #planos { background: rgba(15,110,86,0.04); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .plan-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      transition: all 0.25s;
+    }
+    .plan-card.featured {
+      border-color: var(--lime);
+      box-shadow: 0 0 40px rgba(168,200,58,0.15);
+    }
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .plan-tag {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--lime);
+      color: var(--bg);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--txt);
+      margin-bottom: 8px;
+    }
+    .plan-price {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--lime);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .plan-price sup { font-size: 1.2rem; font-weight: 600; vertical-align: top; margin-top: 8px; }
+    .plan-price sub { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+    .plan-period {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .plan-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(29,158,117,0.08);
+    }
+    .plan-features li .check {
+      color: var(--lime);
+      flex-shrink: 0;
+      font-size: 14px;
+      margin-top: 1px;
+    }
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .plan-btn-lime {
+      background: var(--lime);
+      color: var(--bg);
+    }
+    .plan-btn-lime:hover { background: #bdd844; }
+    .plan-btn-outline {
+      border: 1px solid var(--border);
+      color: var(--txt);
+    }
+    .plan-btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .pay-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-/* ─── SOBRE ─── */
-.sobre{background:var(--bg-light)}
-.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.sobre-img{border-radius:20px;overflow:hidden;position:relative}
-.sobre-img-inner{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--teal-mid) 100%);height:420px;border-radius:20px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;overflow:hidden}
-.sobre-img-inner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(255,255,255,.05)'/%3E%3C/svg%3E") repeat}
-.sobre-stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:absolute;inset:20px}
-.scard{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px}
-.scard-num{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px}
-.scard-label{font-size:11px;color:rgba(255,255,255,.7);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
-.scard-accent{color:var(--lime)}
-.sobre-content p{font-size:1rem;color:var(--text-mid);line-height:1.8;margin-bottom:16px}
-.sobre-list{margin:24px 0 32px}
-.sobre-list li{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #E8F3EF;font-size:14px;color:var(--text-mid)}
-.sobre-list li:last-child{border-bottom:none}
-.check{width:20px;height:20px;background:var(--teal-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.check svg{width:11px;height:11px;color:#fff}
-.btn-teal{background:var(--teal-dark);color:#fff;padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
-.btn-teal:hover{background:var(--teal-mid);transform:translateY(-1px)}
+    /* ─── CONTACT ────────────────────────────── */
+    #contato { text-align: center; }
+    .contact-grid {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 36px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 0.25s;
+      min-width: 200px;
+    }
+    .contact-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-3px);
+    }
+    .contact-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .contact-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .contact-value { font-size: 14px; font-weight: 600; color: var(--lime); }
 
-/* ─── STATS BAR ─── */
-.statsbar{background:var(--teal-dark);padding:48px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
-.stat-item{padding:16px 24px;border-right:1px solid rgba(255,255,255,.15)}
-.stat-item:last-child{border-right:none}
-.stat-num{font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:-2px;display:block}
-.stat-num span{color:var(--lime)}
-.stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px;display:block}
+    /* ─── FOOTER ─────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    footer p { color: var(--muted); font-size: 13px; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--lime); }
+    .powered {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .powered span { color: var(--lime); font-weight: 700; }
 
-/* ─── SERVIÇOS ─── */
-.servicos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.servico-card{background:#fff;border:1px solid #E8F3EF;border-radius:16px;padding:32px 28px;transition:all .3s;position:relative;overflow:hidden}
-.servico-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--teal-dark),var(--teal-mid));opacity:0;transition:opacity .3s}
-.servico-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(15,110,86,.15);border-color:var(--teal-mid)}
-.servico-card:hover::before{opacity:1}
-.servico-card:hover .servico-icon,.servico-card:hover .servico-title,.servico-card:hover .servico-text,.servico-card:hover .servico-link{color:#fff;position:relative;z-index:1}
-.servico-card:hover .servico-icon-wrap{background:rgba(255,255,255,.15)}
-.servico-card:hover .servico-link{color:var(--lime)}
-.servico-icon-wrap{width:52px;height:52px;background:var(--bg-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .3s;position:relative;z-index:1}
-.servico-icon{width:26px;height:26px;color:var(--teal-dark);transition:color .3s}
-.servico-title{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:10px;transition:color .3s;position:relative;z-index:1}
-.servico-text{font-size:13.5px;color:var(--text-mid);line-height:1.7;margin-bottom:20px;transition:color .3s;position:relative;z-index:1}
-.servico-link{font-size:13px;font-weight:600;color:var(--teal-dark);display:flex;align-items:center;gap:6px;transition:color .3s;position:relative;z-index:1}
-.servico-link svg{width:14px;height:14px}
+    /* ─── WHATSAPP FLOAT ─────────────────────── */
+    .wpp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      transition: all 0.25s;
+      text-decoration: none;
+      font-size: 26px;
+    }
+    .wpp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37,211,102,0.7);
+    }
 
-/* ─── PLATAFORMA ─── */
-.plataforma{background:var(--bg-dark);color:#fff}
-.plataforma .section-eyebrow{color:var(--lime)}
-.plataforma .section-title{color:#fff}
-.plataforma .section-sub{color:rgba(255,255,255,.65)}
-.plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.plat-features{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.plat-feat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;transition:all .25s}
-.plat-feat:hover{background:rgba(29,158,117,.12);border-color:rgba(29,158,117,.3)}
-.plat-feat-icon{width:36px;height:36px;background:rgba(168,200,58,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.plat-feat-icon svg{width:18px;height:18px;color:var(--lime)}
-.plat-feat h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
-.plat-feat p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
-.plat-mockup{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
-.plat-bar{background:rgba(255,255,255,.06);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.08)}
-.plat-dot{width:10px;height:10px;border-radius:50%}
-.plat-bar-title{font-size:12px;color:rgba(255,255,255,.4);margin-left:8px}
-.plat-content{padding:20px}
-.plat-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.plat-kpi{background:rgba(255,255,255,.06);border-radius:10px;padding:14px;text-align:center}
-.plat-kpi-val{font-size:20px;font-weight:900;color:#fff;letter-spacing:-1px}
-.plat-kpi-val.g{color:var(--lime)}
-.plat-kpi-val.t{color:#9FE1CB}
-.plat-kpi-lbl{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
-.plat-chart-area{background:rgba(255,255,255,.04);border-radius:10px;padding:14px;height:110px;display:flex;align-items:flex-end;gap:5px}
-.plat-bar-chart{flex:1;border-radius:3px 3px 0 0;min-height:10px}
-.plat-roles{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.role-badge{font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55)}
+    /* ─── ANIMATIONS ─────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease forwards; }
+    .fade-up-2 { animation: fadeUp 0.7s 0.2s ease both; }
+    .fade-up-3 { animation: fadeUp 0.7s 0.4s ease both; }
 
-/* ─── PLANOS ─── */
-.planos{background:var(--bg-light)}
-.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
-.plano-card{background:#fff;border:1.5px solid #E8F3EF;border-radius:20px;padding:36px 28px;text-align:center;transition:all .3s;position:relative}
-.plano-card.featured{border-color:var(--teal-dark);box-shadow:0 0 0 4px rgba(15,110,86,.08)}
-.plano-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal-dark);color:#fff;font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;white-space:nowrap;letter-spacing:.06em}
-.plano-name{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:8px}
-.plano-price{font-size:2.6rem;font-weight:900;color:var(--text-dark);letter-spacing:-2px;line-height:1}
-.plano-price sup{font-size:1rem;font-weight:600;letter-spacing:0}
-.plano-price sub{font-size:14px;font-weight:500;color:var(--text-light);letter-spacing:0}
-.plano-desc{font-size:13px;color:var(--text-mid);margin:12px 0 24px;line-height:1.6}
-.plano-divider{height:1px;background:#E8F3EF;margin:20px 0}
-.plano-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-mid);padding:7px 0;text-align:left}
-.plano-list .check{width:18px;height:18px;flex-shrink:0}
-.plano-list .x-icon{width:18px;height:18px;border-radius:50%;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.plano-list .x-icon svg{width:10px;height:10px;color:#EF4444}
-.plano-btn{width:100%;margin-top:28px;padding:13px;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s}
-.plano-btn-primary{background:var(--teal-dark);color:#fff}
-.plano-btn-primary:hover{background:var(--teal-mid)}
-.plano-btn-outline{background:#fff;color:var(--teal-dark);border:2px solid #E8F3EF}
-.plano-btn-outline:hover{border-color:var(--teal-dark)}
-
-/* ─── CONTATO ─── */
-.contato-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
-.contato-info h3{font-size:1.4rem;font-weight:700;color:var(--text-dark);margin-bottom:12px}
-.contato-info p{font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:28px}
-.contato-items{display:flex;flex-direction:column;gap:16px}
-.contato-item{display:flex;align-items:center;gap:14px}
-.ci-icon{width:44px;height:44px;background:var(--bg-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ci-icon svg{width:20px;height:20px;color:var(--teal-dark)}
-.ci-label{font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.ci-val{font-size:14px;color:var(--text-dark);font-weight:500;margin-top:2px}
-.form-card{background:#fff;border:1px solid #E8F3EF;border-radius:20px;padding:36px;box-shadow:var(--shadow)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-group{margin-bottom:18px}
-.form-group.full{grid-column:1/-1}
-label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-input,select,textarea{width:100%;padding:11px 14px;border:1.5px solid #E8F3EF;border-radius:8px;font-size:14px;font-family:inherit;color:var(--text-dark);outline:none;transition:border-color .2s;background:#fff}
-input:focus,select:focus,textarea:focus{border-color:var(--teal-mid)}
-textarea{resize:vertical;min-height:110px}
-.form-btn{width:100%;padding:14px;background:var(--teal-dark);color:#fff;border-radius:8px;font-size:15px;font-weight:700;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
-.form-btn:hover{background:var(--teal-mid);transform:translateY(-1px)}
-
-/* ─── FOOTER ─── */
-footer{background:var(--bg-dark);color:rgba(255,255,255,.6);padding:64px 0 0}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.footer-brand p{font-size:13px;line-height:1.8;margin:16px 0 24px;max-width:280px}
-.footer-social{display:flex;gap:10px}
-.footer-social a{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s}
-.footer-social a:hover{border-color:var(--lime);color:var(--lime)}
-.footer-social svg{width:16px;height:16px}
-.footer-col h4{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:18px}
-.footer-col ul li{margin-bottom:10px}
-.footer-col ul a{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s}
-.footer-col ul a:hover{color:var(--lime)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px}
-.footer-bottom a{color:var(--lime);transition:opacity .2s}
-.footer-bottom a:hover{opacity:.7}
-.footer-logo-name{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.5px}
-.footer-logo-sub{font-size:9px;color:var(--lime);letter-spacing:.14em;text-transform:uppercase}
-.wpp-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:200;transition:all .2s;color:#fff}
-.wpp-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
-.wpp-float svg{width:28px;height:28px}
-
-/* ─── MOBILE NAV ─── */
-.mobile-menu{display:none;position:fixed;inset:0;z-index:1000;background:#fff;overflow-y:auto;padding:24px}
-.mobile-menu.open{display:flex;flex-direction:column}
-.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
-.mobile-close{width:36px;height:36px;border-radius:8px;border:1px solid #E8F3EF;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.mobile-close svg{width:18px;height:18px;color:var(--text-dark)}
-.mobile-nav-link{display:block;padding:14px 0;font-size:16px;font-weight:500;color:var(--text-dark);border-bottom:1px solid #F0F7F4}
-.mobile-nav-link:hover{color:var(--teal-dark)}
-.mobile-nav-sub{padding:6px 0 6px 16px}
-.mobile-nav-sub a{display:block;padding:10px 0;font-size:14px;color:var(--text-mid)}
-.mobile-cta{margin-top:28px;background:var(--teal-dark);color:#fff;padding:14px;border-radius:8px;font-size:15px;font-weight:600;text-align:center;display:block}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-.sobre-grid,.contato-grid,.plat-grid{grid-template-columns:1fr}
-.servicos-grid{grid-template-columns:1fr 1fr}
-.planos-grid{grid-template-columns:1fr}
-.stats-grid{grid-template-columns:1fr 1fr}
-.stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.15)}
-.footer-grid{grid-template-columns:1fr 1fr;gap:36px}
-.sobre-img{order:-1}
-}
-@media(max-width:768px){
-nav,.header-cta{display:none}
-.mobile-toggle{display:flex}
-.hero h1{font-size:2rem}
-.hero-visual{display:none}
-.plat-features,.plat-kpi-row,.form-row{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-.servicos-grid{grid-template-columns:1fr}
-.topbar-right{display:none}
-.footer-grid{grid-template-columns:1fr}
-}
-</style>
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 28px; }
+      .stat-num { font-size: 1.8rem; }
+      .nexora-card { padding: 40px 24px; }
+    }
+  </style>
 </head>
+
 <body>
+<!-- ══════════ PARTICLE CANVAS ══════════ -->
+<canvas id="bg-canvas"></canvas>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-left">
-      <a href="tel:+5521976852478">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-        (21) 97685-2478
-      </a>
-      <a href="mailto:transformabirj@gmail.com">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        transformabirj@gmail.com
-      </a>
-    </div>
-    <div class="topbar-right">
-      <div class="topbar-social">
-        <a href="https://www.instagram.com/transformabi_oficial/" target="_blank" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/107956130/" target="_blank" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="#" title="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        </a>
+<div class="wrapper">
+
+  <!-- ── NAVBAR ─────────────────────────── -->
+  <nav>
+    <a href="#" class="logo-wrap">
+      <!-- Logo Transforma BI — sem fundo via mix-blend-mode:screen -->
+      <img
+        class="logo-img"
+        src="logo.png"
+        alt="Transforma BI"
+        onerror="this.style.display='none'"
+      >
+      <div class="logo-text">
+        <strong>Transforma BI</strong>
+        <span>Business Intelligence</span>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <img src="data:image/png;base64,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" class="logo-icon" alt="Transforma BI" />
-      <div class="logo-text logo-hide"><span class="logo-name">Transforma BI</span></div>
     </a>
-    <nav>
-      <div class="nav-item">
-        <a href="/" class="nav-link active">Home</a>
+    <ul class="nav-links">
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#nexora">Nexora</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="https://wa.me/5521976852478" class="nav-cta" target="_blank">Fale Conosco</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge fade-up">
+        📊 &nbsp; Business Intelligence · Rio de Janeiro
       </div>
-      <div class="nav-item">
-        <a href="#sobre" class="nav-link">Sobre</a>
-      </div>
-      <div class="nav-item" id="nav-servicos">
-        <a href="#servicos" class="nav-link" onclick="toggleDropdown(event,'nav-servicos')">Serviços
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <h1 class="fade-up-2">
+        Transforme seus <em>dados</em><br>em decisões estratégicas
+      </h1>
+      <p class="fade-up-3">
+        Dashboards personalizados, análise de dados e relatórios gerenciais
+        para empresas que querem crescer com inteligência.
+      </p>
+      <div class="hero-btns fade-up-3">
+        <a href="#dashboards" class="btn-primary">
+          🚀 Ver Dashboards
         </a>
-        <div class="dropdown">
-          <a href="#servicos">Plataforma SaaS</a>
-          <a href="#servicos">Módulo de RH e DP</a>
-          <a href="#servicos">Análise de Vendas</a>
-          <a href="#servicos">Gestão Financeira</a>
-          <a href="#servicos">Logística</a>
-          <a href="#servicos">Performance por Equipe</a>
+        <a href="https://wa.me/5521976852478" target="_blank" class="btn-secondary">
+          💬 Solicitar Demo Gratuita
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">100+</div>
+          <div class="stat-lbl">Dashboards Entregues</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8</div>
+          <div class="stat-lbl">Módulos de BI</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-lbl">Clientes Satisfeitos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24h</div>
+          <div class="stat-lbl">Suporte Dedicado</div>
         </div>
       </div>
-      <div class="nav-item">
-        <a href="#plataforma" class="nav-link">Plataforma</a>
-      </div>
-      <div class="nav-item">
-        <a href="#planos" class="nav-link">Planos</a>
-      </div>
-      <div class="nav-item">
-        <a href="#contato" class="nav-link">Contato</a>
-      </div>
-    </nav>
-    <a href="#contato" class="header-cta">Fale Conosco</a>
-    <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+    </div>
+  </section>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <div class="logo-text">
-      <img src="data:image/png;base64,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" style="height:40px;object-fit:contain" alt="Transforma BI" />
-    </div>
-    <button class="mobile-close" onclick="closeMobileMenu()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <a href="/" class="mobile-nav-link">Home</a>
-  <a href="#sobre" class="mobile-nav-link" onclick="closeMobileMenu()">Sobre</a>
-  <a href="#servicos" class="mobile-nav-link" onclick="closeMobileMenu()">Serviços</a>
-  <a href="#plataforma" class="mobile-nav-link" onclick="closeMobileMenu()">Plataforma</a>
-  <a href="#planos" class="mobile-nav-link" onclick="closeMobileMenu()">Planos</a>
-  <a href="#contato" class="mobile-nav-link" onclick="closeMobileMenu()">Contato</a>
-  <a href="#contato" class="mobile-cta" onclick="closeMobileMenu()">Fale Conosco</a>
-</div>
+  <!-- ── DASHBOARDS / MÓDULOS ─────────────── -->
+  <section id="dashboards">
+    <span class="section-tag">📊 Portfólio</span>
+    <h2 class="section-title">Dashboards por Área</h2>
+    <p class="section-sub">
+      Clique em qualquer módulo para visualizar os dashboards interativos completos do nosso portfólio.
+    </p>
+    <div class="modules-grid">
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <!-- SLIDE 1 -->
-  
-<canvas id="hero-canvas"></canvas>
-<div class="hero-slide active" id="slide-0">
-    <div class="hero-bg"></div>
-    <div class="hero-pattern"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow"><span></span>Plataforma de Business Intelligence</div>
-      <h1>Transforme dados em <span class="accent">decisões estratégicas</span></h1>
-      <p class="hero-sub">Do RH ao CEO: uma plataforma completa que entrega visibilidade total do seu negócio em tempo real, para empresas de qualquer tamanho.</p>
-      <div class="hero-buttons">
-        <a href="#contato" class="btn-primary">Agendar Demonstração
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#servicos" class="btn-outline">Conhecer Módulos</a>
-      </div>
-    </div>
-  </div>
-  <!-- SLIDE 2 -->
-  <div class="hero-slide" id="slide-1">
-    <div class="hero-bg" style="background:linear-gradient(135deg,#0A1628 0%,#0C2B40 50%,#0A1628 100%)"></div>
-    <div class="hero-pattern"></div>
-    <div class="hero-glow" style="background:radial-gradient(circle,rgba(168,200,58,.20) 0%,transparent 70%)"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow" style="color:#A8C83A;border-color:rgba(168,200,58,.3)"><span></span>164+ Insights Disponíveis</div>
-      <h1>Inteligência para <span class="accent">cada área</span> da empresa</h1>
-      <p class="hero-sub">RH, DP, Financeiro, Logística, Vendas e Performance — todos os dados unificados em uma única plataforma SaaS multi-nível.</p>
-      <div class="hero-buttons">
-        <a href="#servicos" class="btn-primary">Ver Módulos
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#planos" class="btn-outline">Ver Planos</a>
-      </div>
-    </div>
-  </div>
-  <!-- SLIDE 3 -->
-  <div class="hero-slide" id="slide-2">
-    <div class="hero-bg" style="background:linear-gradient(135deg,#0F3D2E 0%,#0A2818 50%,#0F3D2E 100%)"></div>
-    <div class="hero-pattern"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow"><span></span>White-Label para Empresas</div>
-      <h1>Seu BI com a <span class="accent">sua identidade</span> visual</h1>
-      <p class="hero-sub">Ofereça dashboards personalizados com a logo e as cores da sua empresa. Solução white-label completa para consultorias e empresas de BI.</p>
-      <div class="hero-buttons">
-        <a href="#contato" class="btn-primary">Falar com Especialista
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#planos" class="btn-outline">Ver Planos</a>
-      </div>
-    </div>
-  </div>
-  <!-- CONTROLS -->
-  <div class="hero-dots">
-    <button class="hero-dot active" onclick="goSlide(0)" aria-label="Slide 1"></button>
-    <button class="hero-dot" onclick="goSlide(1)" aria-label="Slide 2"></button>
-    <button class="hero-dot" onclick="goSlide(2)" aria-label="Slide 3"></button>
-  </div>
-  <div class="hero-arrows">
-    <button class="hero-arrow" onclick="prevSlide()" aria-label="Anterior">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="hero-arrow" onclick="nextSlide()" aria-label="Próximo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</section>
+      <a href="https://transformabi.github.io/portfolio/#rh" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">👥</span>
+        <div class="module-title">RH e Departamento Pessoal</div>
+        <p class="module-desc">Headcount, turnover, banco de horas, holerite, admissões/demissões e dashboards de diversidade.</p>
+        <div class="module-arrow">→</div>
+      </a>
 
-<!-- STATS BAR -->
-<div class="statsbar">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-num" data-target="164">0<span>+</span></span>
-        <span class="stat-label">Insights disponíveis</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="8">0</span>
-        <span class="stat-label">Módulos integrados</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="8">0</span>
-        <span class="stat-label">Níveis de acesso</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">100<span>%</span></span>
-        <span class="stat-label">Baseado em nuvem</span>
-      </div>
-    </div>
-  </div>
-</div>
+      <a href="https://transformabi.github.io/portfolio/#logistica" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">🚛</span>
+        <div class="module-title">Logística</div>
+        <p class="module-desc">Controle de entregas, prazos, rotas, custo por km e performance de transportadoras.</p>
+        <div class="module-arrow">→</div>
+      </a>
 
-<!-- SOBRE -->
-<section class="sobre" id="sobre">
-  <div class="container">
-    <div class="sobre-grid">
-      <div class="sobre-img">
-        <div class="sobre-img-inner">
-          <div class="scard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px;width:100%;height:100%;align-content:center">
-            <div class="scard"><span class="scard-num scard-accent">164+</span><span class="scard-label">Insights</span></div>
-            <div class="scard"><span class="scard-num">99<span style="font-size:16px">%</span></span><span class="scard-label">Uptime</span></div>
-            <div class="scard"><span class="scard-num">8</span><span class="scard-label">Módulos</span></div>
-            <div class="scard"><span class="scard-num scard-accent">∞</span><span class="scard-label">Usuários</span></div>
-          </div>
-        </div>
+      <a href="https://transformabi.github.io/portfolio/#comercial" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">🤝</span>
+        <div class="module-title">Comercial</div>
+        <p class="module-desc">Funil de vendas, conversão por etapa, performance de equipe e metas comerciais.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+      <a href="https://transformabi.github.io/portfolio/#vendas" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">📈</span>
+        <div class="module-title">Vendas</div>
+        <p class="module-desc">Receita por produto, região e canal. Tendências e projeções de faturamento.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+      <a href="https://transformabi.github.io/portfolio/#financeiro" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">💰</span>
+        <div class="module-title">Financeiro</div>
+        <p class="module-desc">DRE, fluxo de caixa, contas a pagar/receber, margem EBITDA e indicadores financeiros.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+      <a href="https://transformabi.github.io/portfolio/#compras" class="module-card" target="_blank">
+        <span class="module-badge">Módulo</span>
+        <span class="module-icon">🛒</span>
+        <div class="module-title">Compras</div>
+        <p class="module-desc">Pedidos por fornecedor, lead time, economias obtidas e índice de conformidade.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+      <a href="https://transformabi.github.io/portfolio/#visao-geral" class="module-card" target="_blank" style="border-color: rgba(168,200,58,0.4);">
+        <span class="module-badge" style="background:rgba(168,200,58,0.25);">Destaque</span>
+        <span class="module-icon">🚀</span>
+        <div class="module-title">Visão Geral — CEO</div>
+        <p class="module-desc">Painel executivo consolidado com todos os KPIs estratégicos da empresa em uma única tela.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+      <a href="https://transformabi.github.io/portfolio/" class="module-card" target="_blank" style="border-style:dashed;">
+        <span class="module-icon">＋</span>
+        <div class="module-title">Ver Portfólio Completo</div>
+        <p class="module-desc">Acesse todos os dashboards disponíveis e explore as soluções personalizadas da Transforma BI.</p>
+        <div class="module-arrow">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── NEXORA ──────────────────────────── -->
+  <section id="nexora">
+    <div class="nexora-card">
+      <div class="nexora-logo-wrap">
+        <!-- Logo Nexora SVG — sem fundo, escalável -->
+        <svg width="52" height="52" viewBox="0 0 40 40" fill="none">
+          <polygon points="20,1 38,11 38,29 20,39 2,29 2,11" fill="#0F6E56" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M11 29V11h3.5L24 24.5V11H27.5V29H24L14.5 15.5V29Z" fill="#A8C83A"/>
+        </svg>
+        <span class="nexora-name">NEXORA</span>
       </div>
-      <div class="sobre-content">
-        <p class="section-eyebrow">Sobre a Transforma BI</p>
-        <h2 class="section-title">Business Intelligence que <span style="color:var(--teal-mid)">transforma</span> seu negócio</h2>
-        <p>A Transforma BI nasceu com um propósito claro: democratizar o acesso a dados inteligentes para empresas de todos os tamanhos. Nossa plataforma SaaS entrega visualizações completas, desde o chão de fábrica até a sala do CEO.</p>
-        <p>Com módulos especializados para cada área do negócio e níveis de acesso customizáveis, cada colaborador vê exatamente o que precisa, no momento certo, de qualquer dispositivo.</p>
-        <ul class="sobre-list">
-          <li>
-            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-            Plataforma multi-tenant com white-label por cliente
-          </li>
-          <li>
-            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-            Importação de dados via CSV e XLSX com validação automática
-          </li>
-          <li>
-            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-            Envio de contracheques por WhatsApp e e-mail
-          </li>
-          <li>
-            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-            Dashboards em tempo real com 164+ indicadores
-          </li>
-          <li>
-            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-            Login via Google, e-mail ou telefone (OTP)
-          </li>
+      <span class="section-tag">Plataforma SaaS</span>
+      <h2 class="section-title" style="margin-top:8px">O Sistema de BI da sua empresa</h2>
+      <p style="color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:1rem">
+        O NEXORA é a plataforma SaaS da Transforma BI. Gestão completa de RH, DP, Financeiro, Comercial e muito mais — tudo integrado, em tempo real, com a identidade da sua empresa.
+      </p>
+      <a href="https://transformabi.github.io/portfolio/#visao-geral" class="btn-primary" target="_blank">
+        Conhecer o NEXORA →
+      </a>
+    </div>
+  </section>
+
+  <!-- ── PLANOS / PAGAMENTO ──────────────── -->
+  <section id="planos">
+    <span class="section-tag">💳 Planos</span>
+    <h2 class="section-title">Escolha o plano ideal</h2>
+    <p class="section-sub">
+      Invista em inteligência de dados. Sem fidelidade mínima, cancele quando quiser.
+    </p>
+    <div class="plans-grid">
+
+      <!-- Plano Starter -->
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price"><sup>R$</sup>997<sub>/mês</sub></div>
+        <p class="plan-period">Ideal para PMEs começando com BI</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Até 3 dashboards</li>
+          <li><span class="check">✓</span> 1 módulo à escolha</li>
+          <li><span class="check">✓</span> Atualização diária</li>
+          <li><span class="check">✓</span> Suporte via WhatsApp</li>
+          <li><span class="check">✓</span> 1 usuário admin</li>
         </ul>
-        <a href="#contato" class="btn-teal">Agendar Demonstração
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <a href="https://wa.me/5521976852478?text=Olá! Tenho interesse no plano Starter da Transforma BI." class="plan-btn plan-btn-outline" target="_blank">
+          Contratar
         </a>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- SERVIÇOS -->
-<section id="servicos">
-  <div class="container">
-    <div class="section-header center">
-      <p class="section-eyebrow">Nossos Módulos</p>
-      <h2 class="section-title">Soluções completas de Business Intelligence</h2>
-      <p class="section-sub">Cada módulo foi projetado para entregar os insights mais relevantes de cada área, de forma integrada e em tempo real.</p>
-    </div>
-    <div class="servicos-grid">
-      <!-- Card 1 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3 class="servico-title">Plataforma SaaS Completa</h3>
-        <p class="servico-text">Dashboard unificado com visibilidade de todas as áreas. Acesso segmentado por nível, do operacional ao CEO, com white-label por cliente.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Card 2 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3 class="servico-title">RH e Departamento Pessoal</h3>
-        <p class="servico-text">Gestão completa de colaboradores, turnover, férias, afastamentos, banco de horas, contracheques e envio automatizado por WhatsApp ou e-mail.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Card 3 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3 class="servico-title">Análise de Vendas</h3>
-        <p class="servico-text">Faturamento, ticket médio, metas vs realizado, ranking de vendedores, forecast e performance por equipe, UF e canal de venda.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Card 4 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-        </div>
-        <h3 class="servico-title">Gestão Financeira</h3>
-        <p class="servico-text">Contas a pagar e receber, fluxo de caixa, DRE simplificado, projeção de saldo, inadimplência e alertas automáticos de vencimentos.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Card 5 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </div>
-        <h3 class="servico-title">Logística e Operações</h3>
-        <p class="servico-text">Controle de frota, OTD, custo por entrega, disponibilidade de veículos, rotas por UF, manutenções preventivas e produtividade por motorista.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Card 6 -->
-      <div class="servico-card">
-        <div class="servico-icon-wrap">
-          <svg class="servico-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <h3 class="servico-title">Performance por Equipe</h3>
-        <p class="servico-text">NPS, absenteísmo, matriz 9-box, ranking de lideranças, score por UF, top performers e colaboradores abaixo da meta — tudo em um painel.</p>
-        <a href="#contato" class="servico-link">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLATAFORMA -->
-<section class="plataforma" id="plataforma">
-  <div class="container">
-    <div class="plat-grid">
-      <div>
-        <p class="section-eyebrow">Nossa Plataforma</p>
-        <h2 class="section-title">Do funcionário <br>ao CEO — em <span style="color:var(--lime)">tempo real</span></h2>
-        <p class="section-sub" style="margin-bottom:40px">Oito níveis de acesso distintos garantem que cada pessoa veja exatamente o que precisa — sem excesso, sem falta de informação.</p>
-        <div class="plat-features">
-          <div class="plat-feat">
-            <div class="plat-feat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h4>Multi-tenant seguro</h4>
-            <p>Isolamento total de dados por empresa com RLS.</p>
-          </div>
-          <div class="plat-feat">
-            <div class="plat-feat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-            </div>
-            <h4>100% em nuvem</h4>
-            <p>Acesse de qualquer dispositivo, a qualquer hora.</p>
-          </div>
-          <div class="plat-feat">
-            <div class="plat-feat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <h4>Dados em tempo real</h4>
-            <p>Indicadores atualizados automaticamente.</p>
-          </div>
-          <div class="plat-feat">
-            <div class="plat-feat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-            </div>
-            <h4>White-label completo</h4>
-            <p>Logo e paleta de cores por cliente.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="plat-mockup">
-          <div class="plat-bar">
-            <div class="plat-dot" style="background:#FF5F57"></div>
-            <div class="plat-dot" style="background:#FFBD2E"></div>
-            <div class="plat-dot" style="background:#28CA41"></div>
-            <span class="plat-bar-title">Dashboard — Transforma BI</span>
-          </div>
-          <div class="plat-content">
-            <div class="plat-kpi-row">
-              <div class="plat-kpi"><div class="plat-kpi-val g">R$2.4M</div><div class="plat-kpi-lbl">Faturamento</div></div>
-              <div class="plat-kpi"><div class="plat-kpi-val">160</div><div class="plat-kpi-lbl">Funcionários</div></div>
-              <div class="plat-kpi"><div class="plat-kpi-val t">94%</div><div class="plat-kpi-lbl">Meta Atingida</div></div>
-            </div>
-            <div class="plat-chart-area">
-              <div class="plat-bar-chart" style="height:35%;background:rgba(168,200,58,.4)"></div>
-              <div class="plat-bar-chart" style="height:55%;background:rgba(168,200,58,.5)"></div>
-              <div class="plat-bar-chart" style="height:45%;background:rgba(168,200,58,.4)"></div>
-              <div class="plat-bar-chart" style="height:70%;background:rgba(168,200,58,.6)"></div>
-              <div class="plat-bar-chart" style="height:60%;background:rgba(168,200,58,.5)"></div>
-              <div class="plat-bar-chart" style="height:80%;background:rgba(168,200,58,.7)"></div>
-              <div class="plat-bar-chart" style="height:75%;background:rgba(168,200,58,.65)"></div>
-              <div class="plat-bar-chart" style="height:90%;background:var(--lime)"></div>
-            </div>
-            <div class="plat-roles">
-              <span class="role-badge">Funcionário</span>
-              <span class="role-badge">RH</span>
-              <span class="role-badge">Gestor</span>
-              <span class="role-badge">Financeiro</span>
-              <span class="role-badge">Logística</span>
-              <span class="role-badge">CEO</span>
-              <span class="role-badge" style="border-color:rgba(168,200,58,.4);color:var(--lime)">Owner</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLANOS -->
-<section class="planos" id="planos">
-  <div class="container">
-    <div class="section-header center">
-      <p class="section-eyebrow">Nossos Planos</p>
-      <h2 class="section-title">Escolha o plano ideal para a sua empresa</h2>
-      <p class="section-sub">Todos os planos incluem suporte, atualizações e acesso à plataforma completa. Sem taxas escondidas.</p>
-    </div>
-    <div class="planos-grid">
-      <!-- Starter -->
-      <div class="plano-card">
-        <div class="plano-name">Starter</div>
-        <div class="plano-price"><sup>R$</sup>297<sub>/mês</sub></div>
-        <p class="plano-desc">Ideal para pequenas empresas que querem começar com inteligência de dados.</p>
-        <div class="plano-divider"></div>
-        <ul class="plano-list">
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Até 50 funcionários</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Módulos: RH + DP + Contracheque</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Banco de horas</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Login Google/e-mail/telefone</li>
-          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">Módulos de Vendas e Logística</span></li>
-          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">White-label</span></li>
+      <!-- Plano Pro (Destaque) -->
+      <div class="plan-card featured">
+        <div class="plan-tag">Mais Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><sup>R$</sup>2.497<sub>/mês</sub></div>
+        <p class="plan-period">Para empresas em crescimento</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Dashboards ilimitados</li>
+          <li><span class="check">✓</span> Todos os módulos</li>
+          <li><span class="check">✓</span> Atualização em tempo real</li>
+          <li><span class="check">✓</span> Suporte prioritário 24h</li>
+          <li><span class="check">✓</span> Até 10 usuários</li>
+          <li><span class="check">✓</span> NEXORA SaaS incluso</li>
+          <li><span class="check">✓</span> Integração com ERP</li>
         </ul>
-        <a href="https://buy.stripe.com/LINK_STARTER_AQUI" class="plano-btn plano-btn-outline" style="display:block;text-align:center;text-decoration:none;">Começar Agora</a>
+        <a href="https://wa.me/5521976852478?text=Olá! Tenho interesse no plano Pro da Transforma BI." class="plan-btn plan-btn-lime" target="_blank">
+          Contratar Agora
+        </a>
       </div>
-      <!-- Business (featured) -->
-      <div class="plano-card featured">
-        <div class="plano-badge">MAIS POPULAR</div>
-        <div class="plano-name">Business</div>
-        <div class="plano-price"><sup>R$</sup>697<sub>/mês</sub></div>
-        <p class="plano-desc">Para empresas em crescimento que precisam de visibilidade completa de todas as áreas.</p>
-        <div class="plano-divider"></div>
-        <ul class="plano-list">
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Funcionários ilimitados</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Todos os 8 módulos inclusos</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>164+ insights e indicadores</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Envio por WhatsApp e e-mail</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Upload de CSV/XLSX</li>
-          <li><div class="x-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div><span style="opacity:.5">White-label personalizado</span></li>
+
+      <!-- Plano Enterprise -->
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price" style="font-size:2rem">Sob consulta</div>
+        <p class="plan-period">Para grandes operações</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do plano Pro</li>
+          <li><span class="check">✓</span> Usuários ilimitados</li>
+          <li><span class="check">✓</span> White-label completo</li>
+          <li><span class="check">✓</span> SLA garantido</li>
+          <li><span class="check">✓</span> Implantação dedicada</li>
+          <li><span class="check">✓</span> Treinamento da equipe</li>
         </ul>
-        <a href="https://buy.stripe.com/LINK_BUSINESS_AQUI" class="plano-btn plano-btn-primary" style="display:block;text-align:center;text-decoration:none;">Começar Agora</a>
+        <a href="https://wa.me/5521976852478?text=Olá! Quero saber mais sobre o plano Enterprise da Transforma BI." class="plan-btn plan-btn-outline" target="_blank">
+          Falar com Especialista
+        </a>
       </div>
-      <!-- Enterprise -->
-      <div class="plano-card">
-        <div class="plano-name">Enterprise</div>
-        <div class="plano-price" style="font-size:2rem">Sob<br>Consulta</div>
-        <p class="plano-desc">Para consultorias e empresas que querem revender a plataforma com identidade própria.</p>
-        <div class="plano-divider"></div>
-        <ul class="plano-list">
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Multi-empresa (multi-tenant)</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>White-label completo</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Paleta de cores por cliente</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Painel exclusivo do Owner</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Suporte prioritário dedicado</li>
-          <li><div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>Onboarding personalizado</li>
-        </ul>
-        <a href="https://buy.stripe.com/LINK_ENTERPRISE_AQUI" class="plano-btn plano-btn-outline" style="display:block;text-align:center;text-decoration:none;">Falar com Especialista</a>
+
+    </div>
+
+    <!-- Meios de pagamento -->
+    <div style="text-align:center;margin-top:48px">
+      <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Aceitamos:</p>
+      <div class="payment-icons">
+        <div class="pay-chip">🔑 PIX</div>
+        <div class="pay-chip">🏦 Boleto Bancário</div>
+        <div class="pay-chip">💳 Cartão de Crédito</div>
+        <div class="pay-chip">💳 Cartão de Débito</div>
+        <div class="pay-chip">📱 Mercado Pago</div>
+        <div class="pay-chip">💼 Transferência TED/DOC</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTATO -->
-<section id="contato">
-  <div class="container">
-    <div class=
+  <!-- ── CONTATO ──────────────────────────── -->
+  <section id="contato">
+    <span class="section-tag">📞 Contato</span>
+    <h2 class="section-title">Vamos conversar?</h2>
+    <p class="section-sub" style="margin:0 auto 0">
+      Entre em contato pelo canal de sua preferência. Respondemos em até 2 horas úteis.
+    </p>
+    <div class="contact-grid">
+      <a href="https://wa.me/5521976852478" target="_blank" class="contact-card">
+        <span class="contact-icon">💬</span>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">(21) 97685-2478</div>
+      </a>
+      <a href="mailto:transformabirj@gmail.com" class="contact-card">
+        <span class="contact-icon">📧</span>
+        <div class="contact-label">E-mail</div>
+        <div class="contact-value">transformabirj@gmail.com</div>
+      </a>
+      <a href="https://www.instagram.com/transformabi_oficial/" target="_blank" class="contact-card">
+        <span class="contact-icon">📷</span>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">@transformabi_oficial</div>
+      </a>
+      <a href="https://www.linkedin.com/company/107956130/" target="_blank" class="contact-card">
+        <span class="contact-icon">💼</span>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">Transforma BI</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────── -->
+  <footer>
+    <p>© 2025 Transforma BI · Rio de Janeiro, RJ · CNPJ em processo</p>
+    <div class="footer-links">
+      <a href="#dashboards">Dashboards</a>
+      <a href="#planos">Planos</a>
+      <a href="#contato">Contato</a>
+      <a href="https://transformabi.github.io/portfolio/" target="_blank">Portfólio</a>
+    </div>
+    <p class="powered">Powered by <span>NEXORA</span> SaaS</p>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<!-- ── WHATSAPP FLOAT ────────────────────── -->
+<a href="https://wa.me/5521976852478" target="_blank" class="wpp-float" title="Fale conosco no WhatsApp">
+  💬
+</a>
+
+<!-- ══════════ PARTICLE NETWORK SCRIPT ══════════ -->
+<script>
+(function () {
+  'use strict';
+
+  const canvas = document.getElementById('bg-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  // ── Config ──────────────────────────────────
+  const CFG = {
+    count:      90,          // número de partículas
+    maxDist:    160,         // distância máxima p/ conectar
+    mouseRadius:220,         // raio de influência do mouse
+    speed:      0.45,        // velocidade base
+    dotRadius:  2.2,         // tamanho das partículas
+    lineWidth:  0.8,         // espessura das linhas
+    colorDot:   '29,158,117',  // verde mid (RGB)
+    colorLine:  '168,200,58',  // lime (RGB)
+    colorMouse: '168,200,58',  // cor das linhas perto do mouse
+    bg:         '#0A1F18',
+  };
+
+  let W, H, mouse = { x: -9999, y: -9999 };
+  let particles = [];
+
+  // ── Resize ──────────────────────────────────
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  // ── Particle class ───────────────────────────
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init = false) {
+      this.x  = Math.random() * W;
+      this.y  = init ? Math.random() * H : (Math.random() > 0.5 ? -5 : H + 5);
+      this.vx = (Math.random() - 0.5) * CFG.speed;
+      this.vy = (Math.random() - 0.5) * CFG.speed;
+      this.r  = CFG.dotRadius * (0.6 + Math.random() * 0.8);
+      this.opacity = 0.3 + Math.random() * 0.5;
+    }
+    update() {
+      // Atração suave ao mouse
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const d  = Math.sqrt(dx * dx + dy * dy);
+      if (d < CFG.mouseRadius && d > 1) {
+        const force = (CFG.mouseRadius - d) / CFG.mouseRadius * 0.025;
+        this.vx += dx / d * force;
+        this.vy += dy / d * force;
+      }
+      // Velocidade máxima
+      const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      const max = CFG.speed * 2.5;
+      if (spd > max) { this.vx = this.vx / spd * max; this.vy = this.vy / spd * max; }
+      // Amortecimento
+      this.vx *= 0.99;
+      this.vy *= 0.99;
+
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Wrap around
+      if (this.x < -20) this.x = W + 20;
+      if (this.x > W + 20) this.x = -20;
+      if (this.y < -20) this.y = H + 20;
+      if (this.y > H + 20) this.y = -20;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CFG.colorDot},${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  // ── Init particles ───────────────────────────
+  function init() {
+    resize();
+    particles = Array.from({ length: CFG.count }, () => new Particle());
+  }
+
+  // ── Draw connections ─────────────────────────
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d > CFG.maxDist) continue;
+
+        // Check mouse proximity for color
+        const mdA = Math.sqrt((mouse.x-a.x)**2 + (mouse.y-a.y)**2);
+        const mdB = Math.sqrt((mouse.x-b.x)**2 + (mouse.y-b.y)**2);
+        const nearMouse = mdA < CFG.mouseRadius || mdB < CFG.mouseRadius;
+        const color = nearMouse ? CFG.colorMouse : CFG.colorLine;
+        const alpha = (1 - d / CFG.maxDist) * (nearMouse ? 0.55 : 0.2);
+
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(${color},${alpha})`;
+        ctx.lineWidth = CFG.lineWidth;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ── Mouse connections ──────────────────────
+  function drawMouseLines() {
+    particles.forEach(p => {
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const d  = Math.sqrt(dx * dx + dy * dy);
+      if (d > CFG.mouseRadius) return;
+      const alpha = (1 - d / CFG.mouseRadius) * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(mouse.x, mouse.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.strokeStyle = `rgba(${CFG.colorMouse},${alpha})`;
+      ctx.lineWidth   = CFG.lineWidth * 1.3;
+      ctx.stroke();
+    });
+    // Mouse dot
+    if (mouse.x > 0 && mouse.x < W) {
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CFG.colorMouse},0.7)`;
+      ctx.fill();
+    }
+  }
+
+  // ── Main loop ────────────────────────────────
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    drawLines();
+    drawMouseLines();
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+
+  // ── Events ────────────────────────────────────
+  window.addEventListener('resize', () => {
+    resize();
+    // respawn particles within new bounds
+    particles.forEach(p => {
+      if (p.x > W) p.x = Math.random() * W;
+      if (p.y > H) p.y = Math.random() * H;
+    });
+  });
+
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('mouseleave', () => {
+    mouse.x = -9999;
+    mouse.y = -9999;
+  });
+  // Mobile touch
+  window.addEventListener('touchmove', e => {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }, { passive: true });
+
+  // ── Start ────────────────────────────────────
+  init();
+  loop();
+})();
+</script>
+
+</body>
+</html>
